@@ -11,7 +11,12 @@ const teams = [
   { id: 'norway', player: 'Anil', name: 'Norway', short: 'NOR', logo: 'https://a.espncdn.com/i/teamlogos/soccer/500/206.png' }
 ];
 const storeKey = 'ssl-season-2-results';
-const state = { results: JSON.parse(localStorage.getItem(storeKey) || '{}'), fixtures: [], filter: 'all', round: 'all' };
+// Edit this object to publish match results. Every view is derived from it.
+const matchResults = {
+  // m001: { home: 2, away: 1, date: '2026-09-01' },
+};
+const savedResults = JSON.parse(localStorage.getItem(storeKey) || 'null');
+const state = { results: { ...(savedResults || {}), ...matchResults }, fixtures: [], filter: 'all', round: 'all' };
 const byId = id => teams.find(team => team.id === id);
 function generateFixtures() {
   const list = [];
